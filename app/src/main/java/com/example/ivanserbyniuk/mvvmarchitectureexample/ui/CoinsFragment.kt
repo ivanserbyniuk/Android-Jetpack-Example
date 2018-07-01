@@ -4,7 +4,6 @@ import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.view.View
-import com.example.ivanserbyniuk.mvvmarchitectureexample.CoinsItemViewModel_
 import com.example.ivanserbyniuk.mvvmarchitectureexample.R
 import com.example.ivanserbyniuk.mvvmarchitectureexample.base.BaseFragment
 import com.example.ivanserbyniuk.mvvmarchitectureexample.network.models.Coin
