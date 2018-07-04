@@ -1,6 +1,5 @@
 package com.example.ivanserbyniuk.mvvmarchitectureexample.ui
 
-import android.arch.lifecycle.Observer
 import android.os.Bundle
 import android.view.View
 import com.example.ivanserbyniuk.mvvmarchitectureexample.R
@@ -17,7 +16,7 @@ class CoinsFragment : BaseFragment<CoinViewModel2>() {
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.loadCoins().observe(this, Observer { buildList(it ?: emptyList()) })
+        viewModel.loadCoins().observe { buildList(it ?: emptyList()) }
     }
 
     private fun buildList(coins: List<Coin>) {

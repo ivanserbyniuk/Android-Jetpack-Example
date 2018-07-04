@@ -1,5 +1,6 @@
 package com.example.ivanserbyniuk.mvvmarchitectureexample.base
 
+import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
@@ -21,9 +22,19 @@ abstract class BaseFragment<T : BaseNetworkViewModel> : Fragment() {
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(viewModelClass)
-        viewModel.progressData.observe(this, Observer { onProgress(it ?: false) })
-        viewModel.errorData.observe(this, Observer { onError(it!!) })
+        viewModel = ViewModelProviders.of(this).get(viewModelClass).apply {
+            progressData.observe(Observer { onProgress(it ?: false) })
+            errorData.observe(Observer { onError(it!!) })
+        }
+    }
+
+    fun <T> LiveData<T>.observe(observer: Observer<T>) {
+        this.observe(this@BaseFragment, observer)
+    }
+
+
+    fun <T> LiveData<T>.observe(observer: (T?) -> Unit) {
+        this.observe(this@BaseFragment, Observer { observer(it) })
     }
 
     abstract fun onProgress(isProgress: Boolean)
