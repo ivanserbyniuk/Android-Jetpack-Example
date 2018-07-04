@@ -16,21 +16,28 @@ class DemoMobiPaid {
         override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
             super.onViewCreated(view, savedInstanceState)
             viewModel.run {
-                onArchiveLoadedData.observe { archives ->
-                    // archives
-                }
-                onPaidFinishedData.observe { result ->
-                    //paid result
-                }
-                isUaNumberData.observe { isUa ->
+                onArchiveLoadedData.observe(::onAchivesLoaded)
+                operatorLoadedData.observe(::onOperatorsLoaded)
+                onPaidFinishedData.observe(::onPaid)
+                isUaNumberData.observe { isUAOperators ->
                     //change ui
                 }
-                operatorLoadedData.observe { operators ->
-                    //operators
-                }
+
             }
             viewModel.checkNumber()
             viewModel.next()
+        }
+
+        fun onAchivesLoaded(data: Any) {
+
+        }
+
+        fun onOperatorsLoaded(data: Any) {
+
+        }
+
+        fun onPaid(data: Any) {
+
         }
 
 
