@@ -16,19 +16,17 @@ class CoinsFragment : BaseFragment<CoinViewModel2>() {
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.loadCoins().observe { buildList(it ?: emptyList()) }
+        viewModel.loadCoins().observe { buildList(it) }
     }
 
     private fun buildList(coins: List<Coin>) {
         rvCoins.setModels(coins.map { CoinsItemViewModel_().bind(it).id(it.id) })
     }
 
-    override fun onProgress(isProgress: Boolean) {
-        progressBar.show(isProgress)
-    }
+    override fun onProgress(isProgress: Boolean) = progressBar.show(isProgress)
 
-    override fun onError(throwable: Throwable) {
-        throwable.printStackTrace()
-    }
+
+    override fun onError(throwable: Throwable) = throwable.printStackTrace()
+
 
 }

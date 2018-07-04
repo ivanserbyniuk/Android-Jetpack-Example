@@ -33,6 +33,7 @@ class DemoMobiPaid {
             viewModel.next()
         }
 
+
         override fun onProgress(isProgress: Boolean) {
         }
 
@@ -116,10 +117,9 @@ class DemoMobiPaid {
                 onArchiveLoadedData.value = it
             }
         }
-    }
 
 
-    class MobyPaidHelper {
+        class MobyPaidHelper {
 
         fun archive(callback: (List<Any>) -> Unit) {
             callback(arrayListOf())

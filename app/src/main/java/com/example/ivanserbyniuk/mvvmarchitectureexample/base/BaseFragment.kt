@@ -23,8 +23,8 @@ abstract class BaseFragment<T : BaseNetworkViewModel> : Fragment() {
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProviders.of(this).get(viewModelClass).apply {
-            progressData.observe(Observer { onProgress(it ?: false) })
-            errorData.observe(Observer { onError(it!!) })
+            progressData.observe { onProgress(it) }
+            errorData.observe { onError(it) }
         }
     }
 
@@ -32,10 +32,16 @@ abstract class BaseFragment<T : BaseNetworkViewModel> : Fragment() {
         this.observe(this@BaseFragment, observer)
     }
 
+    fun <T> LiveData<T>.observe(observer: (T) -> Unit) {
+        this.observe(this@BaseFragment, Observer {
+            if (it != null) observer(it)
+        })
+    }
 
-    fun <T> LiveData<T>.observe(observer: (T?) -> Unit) {
+    fun <T> LiveData<T>.observeNullable(observer: (T?) -> Unit) {
         this.observe(this@BaseFragment, Observer { observer(it) })
     }
+
 
     abstract fun onProgress(isProgress: Boolean)
 
