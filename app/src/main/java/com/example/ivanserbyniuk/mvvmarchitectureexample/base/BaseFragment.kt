@@ -1,8 +1,6 @@
 package com.example.ivanserbyniuk.mvvmarchitectureexample.base
 
-import android.arch.lifecycle.LiveData
-import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModelProviders
+import android.arch.lifecycle.*
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
@@ -11,22 +9,31 @@ import android.view.ViewGroup
 import com.example.ivanserbyniuk.mvvmarchitectureexample.viewmodels.BaseNetworkViewModel
 
 
-abstract class BaseFragment<T : BaseNetworkViewModel> : Fragment() {
-    protected abstract val resId:Int
-    protected lateinit var viewModel: T
-    abstract val viewModelClass: Class<T>
+abstract class BaseFragment : Fragment() {
+    protected abstract val resId: Int
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(resId, container)
     }
 
-    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(viewModelClass).apply {
-            progressData.observe { onProgress(it) }
-            errorData.observe { onError(it) }
-        }
+    inline fun <reified T : BaseNetworkViewModel> viewModel(): T {
+        return observBaseEvents(ViewModelProviders.of(this).get(T::class.java))
     }
+
+    inline fun <reified T : BaseNetworkViewModel> viewModelByFactory(noinline viewModel: () -> T): T {
+        return observBaseEvents(ViewModelProviders.of(this, CustomFactory(viewModel)).get(T::class.java))
+    }
+
+    inline fun <reified T : BaseNetworkViewModel> viewModelByFactory(factory: ViewModelProvider.Factory): T {
+        return observBaseEvents(ViewModelProviders.of(this, factory).get(T::class.java))
+    }
+
+    public fun <T : BaseNetworkViewModel> observBaseEvents(networkViewModel: T) =
+            networkViewModel.apply {
+                progressData.observe { onProgress(it) }
+                errorData.observe { onError(it) }
+            }
+
 
     fun <T> LiveData<T>.observe(observer: Observer<T>) {
         this.observe(this@BaseFragment, observer)
@@ -47,4 +54,10 @@ abstract class BaseFragment<T : BaseNetworkViewModel> : Fragment() {
 
     abstract fun onError(throwable: Throwable)
 
+
+    class CustomFactory(private val viewModel: () -> ViewModel) : ViewModelProvider.Factory {
+        override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+            return viewModel() as T
+        }
+    }
 }

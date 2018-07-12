@@ -1,54 +1,51 @@
 package com.example.ivanserbyniuk.mvvmarchitectureexample.ui
 
 import android.arch.lifecycle.MutableLiveData
-import android.os.Bundle
-import android.view.View
-import com.example.ivanserbyniuk.mvvmarchitectureexample.base.BaseFragment
 import com.example.ivanserbyniuk.mvvmarchitectureexample.viewmodels.BaseNetworkViewModel
 import org.json.JSONObject
 
 class DemoMobiPaid {
 
-    class MobiPaidFragment : BaseFragment<MobiModiViewModel>() {
-        override val resId: Int = 0
-        override val viewModelClass = MobiModiViewModel::class.java
+    /* class MobiPaidFragment : BaseFragment<MobiModiViewModel>() {
+         override val resId: Int = 0
+         override val viewModelClass = MobiModiViewModel::class.java
 
-        override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
-            super.onViewCreated(view, savedInstanceState)
-            viewModel.run {
-                onArchiveLoadedData.observe(::onAchivesLoaded)
-                operatorLoadedData.observe(::onOperatorsLoaded)
-                onPaidFinishedData.observe(::onPaid)
-                isUaNumberData.observe { isUAOperators ->
-                    //change ui
-                }
+         override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+             super.onViewCreated(view, savedInstanceState)
+             viewModel.run {
+                 onArchiveLoadedData.observe(::onAchivesLoaded)
+                 operatorLoadedData.observe(::onOperatorsLoaded)
+                 onPaidFinishedData.observe(::onPaid)
+                 isUaNumberData.observe { isUAOperators ->
+                     //change ui
+                 }
 
-            }
-            viewModel.checkNumber()
-            viewModel.next()
-        }
+             }
+             viewModel.checkNumber()
+             viewModel.next()
+         }
 
-        fun onAchivesLoaded(data: Any) {
+         fun onAchivesLoaded(data: Any) {
 
-        }
+         }
 
-        fun onOperatorsLoaded(data: Any) {
+         fun onOperatorsLoaded(data: Any) {
 
-        }
+         }
 
-        fun onPaid(data: Any) {
+         fun onPaid(data: Any) {
 
-        }
-
-
-        override fun onProgress(isProgress: Boolean) {
-        }
-
-        override fun onError(throwable: Throwable) {
-        }
+         }
 
 
-    }
+         override fun onProgress(isProgress: Boolean) {
+         }
+
+         override fun onError(throwable: Throwable) {
+         }
+
+
+     }*/
 
     class MobiModiViewModel : BaseNetworkViewModel() {
         var number: String = ""
@@ -150,4 +147,5 @@ class DemoMobiPaid {
             val amount: String? = null
     )
 
+    }
 }
