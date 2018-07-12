@@ -19,7 +19,7 @@ class CoinsFragment : BaseFragment() {
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.loadCoins().observe { buildList(it) }
+        viewModel.loadCoins().observe(::buildList)
     }
 
     private fun buildList(coins: List<Coin>) {
@@ -27,7 +27,6 @@ class CoinsFragment : BaseFragment() {
     }
 
     override fun onProgress(isProgress: Boolean) = progressBar.show(isProgress)
-
 
     override fun onError(throwable: Throwable) = throwable.printStackTrace()
 

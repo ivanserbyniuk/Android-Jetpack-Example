@@ -16,23 +16,27 @@ abstract class BaseFragment : Fragment() {
         return inflater.inflate(resId, container)
     }
 
-    inline fun <reified T : BaseNetworkViewModel> viewModel(): T {
+    inline fun <reified T : ViewModel> viewModel(): T {
         return observBaseEvents(ViewModelProviders.of(this).get(T::class.java))
     }
 
-    inline fun <reified T : BaseNetworkViewModel> viewModelByFactory(noinline viewModel: () -> T): T {
+
+    inline fun <reified T : ViewModel> viewModelByFactory(noinline viewModel: () -> T): T {
         return observBaseEvents(ViewModelProviders.of(this, CustomFactory(viewModel)).get(T::class.java))
     }
 
-    inline fun <reified T : BaseNetworkViewModel> viewModelByFactory(factory: ViewModelProvider.Factory): T {
+    inline fun <reified T : ViewModel> viewModelByFactory(factory: ViewModelProvider.Factory): T {
         return observBaseEvents(ViewModelProviders.of(this, factory).get(T::class.java))
     }
 
-    public fun <T : BaseNetworkViewModel> observBaseEvents(networkViewModel: T) =
-            networkViewModel.apply {
-                progressData.observe { onProgress(it) }
-                errorData.observe { onError(it) }
-            }
+    fun <T : ViewModel> observBaseEvents(viewModel: T): T {
+        if (viewModel is BaseNetworkViewModel) {
+            viewModel.progressData.observe { onProgress(it) }
+            viewModel.errorData.observe { onError(it) }
+        }
+        return viewModel
+
+    }
 
 
     fun <T> LiveData<T>.observe(observer: Observer<T>) {

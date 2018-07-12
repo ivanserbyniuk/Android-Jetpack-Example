@@ -1,18 +1,20 @@
 package com.example.ivanserbyniuk.mvvmarchitectureexample.ui
 
 import android.arch.lifecycle.MutableLiveData
+import android.os.Bundle
+import android.view.View
+import com.example.ivanserbyniuk.mvvmarchitectureexample.base.BaseFragment
 import com.example.ivanserbyniuk.mvvmarchitectureexample.viewmodels.BaseNetworkViewModel
 import org.json.JSONObject
 
 class DemoMobiPaid {
 
-    /* class MobiPaidFragment : BaseFragment<MobiModiViewModel>() {
+    class MobiPaidFragment : BaseFragment() {
          override val resId: Int = 0
-         override val viewModelClass = MobiModiViewModel::class.java
 
          override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
              super.onViewCreated(view, savedInstanceState)
-             viewModel.run {
+             val viewModel = viewModel<MobiModiViewModel>().apply {
                  onArchiveLoadedData.observe(::onAchivesLoaded)
                  operatorLoadedData.observe(::onOperatorsLoaded)
                  onPaidFinishedData.observe(::onPaid)
@@ -45,7 +47,7 @@ class DemoMobiPaid {
          }
 
 
-     }*/
+    }
 
     class MobiModiViewModel : BaseNetworkViewModel() {
         var number: String = ""
