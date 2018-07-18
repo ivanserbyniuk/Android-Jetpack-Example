@@ -1,18 +1,19 @@
 package com.example.ivanserbyniuk.mvvmarchitectureexample.ui
 
 import android.arch.lifecycle.MutableLiveData
-import android.os.Bundle
-import android.view.View
-import com.example.ivanserbyniuk.mvvmarchitectureexample.base.BaseFragment
 import com.example.ivanserbyniuk.mvvmarchitectureexample.viewmodels.BaseNetworkViewModel
 import org.json.JSONObject
 
 class DemoMobiPaid {
+/*
 
     class MobiPaidFragment : BaseFragment() {
-         override val resId: Int = 0
+        override val viewModelClass: Class<out CoinViewModel2>
+            get() = TODO("not implemented") //To change initializer of created properties use File | Settings | File Templates.
+        override val resId: Int = 0
 
-         override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+    */
+/*     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
              super.onViewCreated(view, savedInstanceState)
              val viewModel = viewModel<MobiModiViewModel>().apply {
                  onArchiveLoadedData.observe(::onAchivesLoaded)
@@ -25,7 +26,8 @@ class DemoMobiPaid {
              }
              viewModel.checkNumber()
              viewModel.next()
-         }
+         }*//*
+
 
          fun onAchivesLoaded(data: Any) {
 
@@ -48,6 +50,7 @@ class DemoMobiPaid {
 
 
     }
+*/
 
     class MobiModiViewModel : BaseNetworkViewModel() {
         var number: String = ""
