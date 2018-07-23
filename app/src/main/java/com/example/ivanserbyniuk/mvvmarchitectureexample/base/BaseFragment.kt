@@ -9,10 +9,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.ivanserbyniuk.mvvmarchitectureexample.viewmodels.BaseNetworkViewModel
+import kotlin.reflect.KClass
 
 abstract class BaseFragment<T : BaseNetworkViewModel> : Fragment() {
     protected abstract val resId: Int
-    protected abstract val viewModelClass: Class<T>
+    protected abstract val viewModelClass: KClass<T>
 
     protected val viewModel: T by lazy {
         val viewModeBuilder = initVM
@@ -26,11 +27,11 @@ abstract class BaseFragment<T : BaseNetworkViewModel> : Fragment() {
     }
 
     fun viewModelByFactory(viewModel: () -> T): T {
-        return ViewModelProviders.of(this, CustomFactory(viewModel)).get(viewModelClass)
+        return ViewModelProviders.of(this, CustomFactory(viewModel)).get(viewModelClass.java)
     }
 
     private fun createViewModel(): T {
-        return ViewModelProviders.of(this).get(viewModelClass)
+        return ViewModelProviders.of(this).get(viewModelClass.java)
     }
 
     fun BaseNetworkViewModel.observBaseEvents(): BaseNetworkViewModel {

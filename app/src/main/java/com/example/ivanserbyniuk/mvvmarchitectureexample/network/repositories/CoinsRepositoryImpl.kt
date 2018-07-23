@@ -2,6 +2,7 @@ package com.example.ivanserbyniuk.mvvmarchitectureexample.network.repositories
 
 import com.example.ivanserbyniuk.mvvmarchitectureexample.network.NetApi
 import com.example.ivanserbyniuk.mvvmarchitectureexample.network.RetrofitServiceGenerator
+import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 
 class CoinsRepositoryNetwork : CoinsRepository {
@@ -9,5 +10,6 @@ class CoinsRepositoryNetwork : CoinsRepository {
     private val netApi = RetrofitServiceGenerator(baseCoinMarketCap, NetApi::class.java).netApi
 
     override fun getCoins() = netApi.getCoins().observeOn(AndroidSchedulers.mainThread())
+    override fun getFavorites() = Single.just("")
 
 }

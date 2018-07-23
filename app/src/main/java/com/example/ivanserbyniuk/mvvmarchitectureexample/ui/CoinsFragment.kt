@@ -11,7 +11,7 @@ import kotlinx.android.synthetic.main.fragment_coins.*
 
 class CoinsFragment : BaseFragment<CoinViewModel2>() {
 
-    override val viewModelClass = CoinViewModel2::class.java
+    override val viewModelClass = CoinViewModel2::class
     override val initVM = { CoinViewModel2("") }
 
     override val resId = R.layout.fragment_coins

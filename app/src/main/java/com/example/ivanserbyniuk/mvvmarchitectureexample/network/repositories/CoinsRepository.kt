@@ -6,4 +6,6 @@ import io.reactivex.Single
 interface CoinsRepository {
 
     fun getCoins(): Single<List<Coin>>
+    fun getFavorites(): Single<String>
+
 }
