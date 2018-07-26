@@ -1,7 +1,7 @@
 package com.example.ivanserbyniuk.mvvmarchitectureexample.ui
 
 import android.arch.lifecycle.MutableLiveData
-import com.example.ivanserbyniuk.mvvmarchitectureexample.viewmodels.BaseNetworkViewModel
+import com.example.ivanserbyniuk.mvvmarchitectureexample.viewmodels.base.BaseNetworkViewModel
 import org.json.JSONObject
 
 class DemoMobiPaid {

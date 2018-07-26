@@ -8,7 +8,7 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.ivanserbyniuk.mvvmarchitectureexample.viewmodels.BaseNetworkViewModel
+import com.example.ivanserbyniuk.mvvmarchitectureexample.viewmodels.base.BaseNetworkViewModel
 import kotlin.reflect.KClass
 
 abstract class BaseFragment<T : BaseNetworkViewModel> : Fragment() {

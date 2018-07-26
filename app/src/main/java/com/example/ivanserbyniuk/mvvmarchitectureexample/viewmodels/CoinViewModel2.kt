@@ -5,6 +5,7 @@ import android.arch.lifecycle.MutableLiveData
 import com.example.ivanserbyniuk.mvvmarchitectureexample.network.models.Coin
 import com.example.ivanserbyniuk.mvvmarchitectureexample.network.repositories.CoinsRepositoryNetwork
 import com.example.ivanserbyniuk.mvvmarchitectureexample.utils.plusAssign
+import com.example.ivanserbyniuk.mvvmarchitectureexample.viewmodels.base.BaseNetworkViewModel
 
 class CoinViewModel2(val initValue: String = "") : BaseNetworkViewModel() {
 

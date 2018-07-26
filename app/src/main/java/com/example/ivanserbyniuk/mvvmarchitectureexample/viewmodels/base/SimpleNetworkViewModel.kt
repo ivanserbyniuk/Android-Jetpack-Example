@@ -1,4 +1,4 @@
-package com.example.ivanserbyniuk.mvvmarchitectureexample.viewmodels
+package com.example.ivanserbyniuk.mvvmarchitectureexample.viewmodels.base
 
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
@@ -21,7 +21,6 @@ abstract class SimpleNetworkViewModel<T> : BaseNetworkViewModel() {
         override fun onError(throwable: Throwable) {
             error(throwable)
         }
-
     }
 
     val resultLiveData: LiveData<T> get() = _result
